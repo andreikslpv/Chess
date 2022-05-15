@@ -6,8 +6,8 @@ abstract class ChessPiece {
         this.color = color;
     }
 
-    public boolean checkBorder(int line, int column, int toLine, int toColumn) {
-        if (toLine <= 7 && toLine >= 0 && toColumn <= 7 && toColumn >= 0 && !((line == toLine) && (column == toColumn))) {
+    public boolean checkPos(int pos) {
+        if (pos <= 7 && pos >= 0) {
             return true;
         } else {
             return false;

@@ -1,14 +1,7 @@
-public class Horse extends ChessPiece {
+public class Rook extends ChessPiece{
 
-    public Horse(String color) {
+    public Rook(String color) {
         super(color);
-    }
-
-    private boolean checkHorseMove(int l, int c) {
-        if ((l == 2 && c == 1) || (l == 1 && c == 2)) {
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -16,7 +9,7 @@ public class Horse extends ChessPiece {
         boolean result = false;
         if (checkPos(line) && checkPos(toLine) && checkPos(column) && checkPos(toColumn)
                 && !((line == toLine) && (column == toColumn))
-                && checkHorseMove(Math.abs(toLine - line), Math.abs(toColumn - column))
+                && ((toLine - line) == 0 || (toColumn - column) == 0)
                 && chessBoard.board[toLine][toColumn] == null) {
             result = true;
         }
@@ -30,6 +23,7 @@ public class Horse extends ChessPiece {
 
     @Override
     String getSymbol() {
-        return "H";
+        return "R";
     }
 }
+
