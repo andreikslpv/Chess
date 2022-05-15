@@ -7,11 +7,7 @@ abstract class ChessPiece {
     }
 
     public boolean checkPos(int pos) {
-        if (pos <= 7 && pos >= 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return pos >= 0 && pos <= 7;
     }
 
     abstract boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn);
