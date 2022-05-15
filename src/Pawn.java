@@ -28,8 +28,9 @@ public class Pawn extends ChessPiece {
     @Override
     boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
         boolean result = false;
-        if (checkBorder(line, toLine, column, toColumn) && chessBoard.board[toLine][toColumn] == null
-                && checkPawnMove(line, column, toLine, toColumn)) {
+        if (checkBorder(line, toLine, column, toColumn)
+                && checkPawnMove(line, column, toLine, toColumn)
+                && chessBoard.board[toLine][toColumn] == null) {
             result = true;
         }
         return result;
