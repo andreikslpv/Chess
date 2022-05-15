@@ -13,14 +13,16 @@ public class Queen extends ChessPiece{
 
     @Override
     boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        boolean result = false;
         if (checkPos(line) && checkPos(toLine) && checkPos(column) && checkPos(toColumn)
                 && !((line == toLine) && (column == toColumn))
-                && checkQueenMove(toLine - line, toColumn - column)
-                && chessBoard.board[toLine][toColumn] == null) {
-            result = true;
+                && (chessBoard.board[toLine][toColumn] == null || !chessBoard.board[toLine][toColumn].getColor().equals(this.color))
+                && chessBoard.board[line][column] != null) {
+            if (!chessBoard.board[line][column].equals(this)) return false;
+            if (checkQueenMove(toLine - line, toColumn - column)) return true;
+        } else {
+            return false;
         }
-        return result;
+        return false;
     }
 
     @Override

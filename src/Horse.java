@@ -4,23 +4,20 @@ public class Horse extends ChessPiece {
         super(color);
     }
 
-    private boolean checkHorseMove(int l, int c) {
-        if ((l == 2 && c == 1) || (l == 1 && c == 2)) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        boolean result = false;
         if (checkPos(line) && checkPos(toLine) && checkPos(column) && checkPos(toColumn)
                 && !((line == toLine) && (column == toColumn))
-                && checkHorseMove(Math.abs(toLine - line), Math.abs(toColumn - column))
-                && chessBoard.board[toLine][toColumn] == null) {
-            result = true;
+                && (chessBoard.board[toLine][toColumn] == null || !chessBoard.board[toLine][toColumn].getColor().equals(this.color))
+                && chessBoard.board[line][column] != null) {
+            if (!chessBoard.board[line][column].equals(this)) return false;
+            int l = Math.abs(toLine - line);
+            int c = Math.abs(toColumn - column);
+            if ((l == 2 && c == 1) || (l == 1 && c == 2)) return true;
+        } else {
+            return false;
         }
-        return result;
+        return false;
     }
 
     @Override

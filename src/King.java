@@ -6,14 +6,16 @@ public class King extends ChessPiece {
 
     @Override
     boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        boolean result = false;
         if (checkPos(line) && checkPos(toLine) && checkPos(column) && checkPos(toColumn)
                 && !((line == toLine) && (column == toColumn))
-                && Math.abs(toLine - line) <= 1 && Math.abs(toColumn - column) <= 1
-                && chessBoard.board[toLine][toColumn] == null) {
-            result = true;
+                && (chessBoard.board[toLine][toColumn] == null || !chessBoard.board[toLine][toColumn].getColor().equals(this.color))
+                && chessBoard.board[line][column] != null) {
+            if (!chessBoard.board[line][column].equals(this)) return false;
+            if (Math.abs(toLine - line) <= 1 && Math.abs(toColumn - column) <= 1) return true;
+        } else {
+            return false;
         }
-        return result;
+        return false;
     }
 
     public boolean isUnderAttack(ChessBoard board, int line, int column) {
