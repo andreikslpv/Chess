@@ -12,27 +12,7 @@ public class Bishop extends ChessPiece {
                 && chessBoard.board[line][column] != null) {
             if (!chessBoard.board[line][column].equals(this)) return false;
             if (Math.abs(toLine - line) == Math.abs(toColumn - column)) {
-                if (toLine > line && toColumn > column) {
-                    for (int i = 1; i < toLine - line; i++) {
-                        if (chessBoard.board[line+i][column+i] != null) return false;
-                    }
-                }
-                if (toLine < line && toColumn < column) {
-                    for (int i = 1; i < line - toLine; i++) {
-                        if (chessBoard.board[line-i][column-i] != null) return false;
-                    }
-                }
-                if (toLine > line && toColumn < column) {
-                    for (int i = 1; i < toLine - line; i++) {
-                        if (chessBoard.board[line+i][column-i] != null) return false;
-                    }
-                }
-                if (toLine < line && toColumn > column) {
-                    for (int i = 1; i < line - toLine; i++) {
-                        if (chessBoard.board[line-i][column+i] != null) return false;
-                    }
-                }
-                return true;
+                return chessBoard.checkDiagonalForFree(line, column, toLine, toColumn);
             }
         } else {
             return false;

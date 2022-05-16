@@ -4,13 +4,6 @@ public class Queen extends ChessPiece{
         super(color);
     }
 
-    private boolean checkQueenMove(int l, int c) {
-        if ((Math.abs(l) == Math.abs(c)) || (l == 0 || c == 0)) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
         if (checkPos(line) && checkPos(toLine) && checkPos(column) && checkPos(toColumn)
@@ -18,7 +11,12 @@ public class Queen extends ChessPiece{
                 && (chessBoard.board[toLine][toColumn] == null || !chessBoard.board[toLine][toColumn].getColor().equals(this.color))
                 && chessBoard.board[line][column] != null) {
             if (!chessBoard.board[line][column].equals(this)) return false;
-            if (checkQueenMove(toLine - line, toColumn - column)) return true;
+            if (Math.abs(toLine - line) == Math.abs(toColumn - column)) {
+                return chessBoard.checkDiagonalForFree(line, column, toLine, toColumn);
+            }
+            if ((toLine - line) == 0 || (toColumn - column) == 0) {
+                return chessBoard.checkLineForFree(line, column, toLine, toColumn);
+            }
         } else {
             return false;
         }

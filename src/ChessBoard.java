@@ -10,6 +10,54 @@ public class ChessBoard {
         return this.nowPlayer;
     }
 
+    public boolean checkLineForFree(int line, int column, int toLine, int toColumn) {
+        if (toLine > line) {
+            for (int i = 1; i < toLine - line; i++) {
+                if (board[line+i][column] != null) return false;
+            }
+        }
+        if (toLine < line) {
+            for (int i = 1; i < line - toLine; i++) {
+                if (board[line-i][column] != null) return false;
+            }
+        }
+        if (toColumn < column) {
+            for (int i = 1; i < column - toColumn; i++) {
+                if (board[line][column-i] != null) return false;
+            }
+        }
+        if (toColumn > column) {
+            for (int i = 1; i < toColumn - column; i++) {
+                if (board[line][column+i] != null) return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkDiagonalForFree(int line, int column, int toLine, int toColumn) {
+        if (toLine > line && toColumn > column) {
+            for (int i = 1; i < toLine - line; i++) {
+                if (board[line+i][column+i] != null) return false;
+            }
+        }
+        if (toLine < line && toColumn < column) {
+            for (int i = 1; i < line - toLine; i++) {
+                if (board[line-i][column-i] != null) return false;
+            }
+        }
+        if (toLine > line && toColumn < column) {
+            for (int i = 1; i < toLine - line; i++) {
+                if (board[line+i][column-i] != null) return false;
+            }
+        }
+        if (toLine < line && toColumn > column) {
+            for (int i = 1; i < line - toLine; i++) {
+                if (board[line-i][column+i] != null) return false;
+            }
+        }
+        return true;
+    }
+
     public boolean moveToPosition(int startLine, int startColumn, int endLine, int endColumn) {
         if (checkPos(startLine) && checkPos(startColumn)) {
 
