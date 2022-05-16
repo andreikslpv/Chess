@@ -89,9 +89,9 @@ public class ChessBoard {
         System.out.println();
         System.out.println("Player 2(Black)");
         System.out.println();
-        System.out.println("\t0\t1\t2\t3\t4\t5\t6\t7");
+        System.out.println("\ta\tb\tc\td\te\tf\tg\th");
         for (int i = 7; i > -1; i--) {
-            System.out.print(i + "\t");
+            System.out.print(i + 1 + "\t");
             for (int j = 0; j < 8; j++) {
                 if (board[i][j] == null) {
                     System.out.print(".." + "\t");
@@ -99,10 +99,11 @@ public class ChessBoard {
                     System.out.print(board[i][j].getSymbol() + board[i][j].getColor().substring(0, 1).toLowerCase() + "\t");
                 }
             }
-            System.out.println();
-            System.out.println();
+            System.out.println(i + 1);
+            if (i != 0) System.out.println();
         }
-        System.out.println("Player 1(White)");
+        System.out.println("\ta\tb\tc\td\te\tf\tg\th");
+        System.out.println("\nPlayer 1(White)");
     }
 
     public boolean checkPos(int pos) {

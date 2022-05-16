@@ -50,7 +50,7 @@ public class Main {
                 'exit' - для выхода
                 'replay' - для перезапуска игры
                 'castling0' или 'castling7' - для рокировки по соответствующей линии
-                'move 1 1 2 3' - для передвижения фигуры с позиции 1 1 на 2 3(поле это двумерный массив от 0 до 7)
+                'move e2 e4' - для передвижения фигуры с позиции e2 на e4
                 Проверьте могут ли фигуры ходить друг сквозь друга, корректно ли съедают друг друга, можно ли поставить шах и сделать рокировку?""");
         System.out.println();
         board.printBoard();
@@ -79,10 +79,10 @@ public class Main {
                 } else if (s.contains("move")) {
                     String[] a = s.split(" ");
                     try {
-                        int line = Integer.parseInt(a[1]);
-                        int column = Integer.parseInt(a[2]);
-                        int toLine = Integer.parseInt(a[3]);
-                        int toColumn = Integer.parseInt(a[4]);
+                        int line = Integer.parseInt(a[1].substring(1)) - 1;
+                        int toLine = Integer.parseInt(a[2].substring(1)) - 1;
+                        int column = a[1].charAt(0) - 'a';
+                        int toColumn = a[2].charAt(0) - 'a';
                         if (board.moveToPosition(line, column, toLine, toColumn)) {
                             System.out.println("Успешно передвинулись");
                             board.printBoard();
