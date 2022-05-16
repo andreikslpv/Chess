@@ -70,7 +70,12 @@ public class ChessBoard {
                     board[startLine][startColumn].check = false;
                 }
 
-                board[endLine][endColumn] = board[startLine][startColumn]; // if piece can move, we moved a piece
+                if ((board[startLine][startColumn].getColor().equals("White") && endLine == 7) ||  // if the pawn has reached the end of the board
+                        (board[startLine][startColumn].getColor().equals("Black") && endLine == 0)) {
+                    board[endLine][endColumn] = new Queen(board[startLine][startColumn].getColor());
+                } else {
+                    board[endLine][endColumn] = board[startLine][startColumn]; // else if piece can move, we moved a piece
+                }
                 board[startLine][startColumn] = null; // set null to previous cell
                 this.nowPlayer = this.nowPlayerColor().equals("White") ? "Black" : "White";
 
